@@ -1,4 +1,5 @@
 const Validator = require('Validator')
+const response_code = require("../utilities/response-error-code.js")
 const {default: localizify} = require('localizify')
 const en = require('../language/en.js')
 const ar = require('../language/ar.js')
@@ -94,7 +95,9 @@ const middleware = {
     localizify.setLocale(req.lang);
 
     callback();
-    }
+    },
+
+
 }
 module.exports = middleware;
 

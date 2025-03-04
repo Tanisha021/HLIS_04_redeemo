@@ -1,19 +1,24 @@
 const checkValidatorRules = {
 
     login: {
-        email: "required|email",
-        passwords: "required|min:8"
+        email_id: 'required|email',
+        login_type: 'required|in:S,G,F,A',
+        // Passwords should only be required for standard login
+        passwords: 'required_if:login_type,S',
+        // Social ID should only be required for social logins
+        social_id: 'required_if:login_type,G,F,A'
     },
     signup: {
         email_id: 'required|email',
-        passwords: 'required|min:8',
-        // first_name: 'required|string',
-        // last_name: 'required|string',
-        mobile_number: 'required|string|min:10|regex:/^[0-9]+$/',
-        // country_code: 'required'
+        // passwords: 'required|min:8',
+        // phone_number: 'required|string|min:10|regex:/^[0-9]+$/',
     },
     forgotPassword:{
         email_id: "required|email"
+    },
+    addProfilePic:{
+        user_id: "required",
+        profile_pic: "required"
     },
     verifyOTP: {
         email_id: 'required',
@@ -23,9 +28,17 @@ const checkValidatorRules = {
         email_id: "required|email",
         passwords: "required|min:8"
     },
+    changePassword:{
+        user_id: "required",
+        old_password: "required|min:8",
+        new_password: "required|min:8"
+    },
     compeleteUserProfile:{
-        user_full_name: "required",
-        date_of_birth: "required"
+        fname:"required",
+        lname:"required",
+        address:"required",
+        dob:"required",
+        gender:"required"
     },
     create_post:{
         descriptions: "required",

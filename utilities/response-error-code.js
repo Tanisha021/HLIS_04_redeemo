@@ -8,6 +8,8 @@ const error_code={
     REQUEST_ERROR:"11",
     INACTIVE_ACCOUNT:"3",
     CODE_NULL:"8",
-    NOT_REGISTER:"12"
+    NOT_REGISTER:"12",
+    NOT_FOUND: "404",
+    UNAUTHORIZED: "401"
 }
 module.exports = error_code;

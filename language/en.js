@@ -13,7 +13,7 @@ var message = {
     "no_data_found": "No data found",
     "data_found": "Data found",
    
-        "rest_keywords_password": "password",
+        "rest_keywords_password": "password ",
         "rest_keywords_email_id": "email id",
         "rest_keywords_user_full_name": "user full name",
         "rest_keywords_user_date_of_birth": "date of birth",
@@ -26,7 +26,18 @@ var message = {
         "rest_keywords_post_type": "Post Type",
         "rest_keywords_category_id": "Category ID",
         "rest_keywords_user_id": "User ID",
-        "rest_keywords_media_names": "Media Names"
+        "rest_keywords_media_names": "Media Names",
+        "profile_completed": "Profile Completed",
+        "user_not_found": "User not found",
+        "rest_keywords_profile_pic": "Profile Picture required",
+        "rest_keywords_user_date_of_birth": "Date of Birth",
+        "rest_keywords_user_fname": "first Name",
+        "rest_keywords_user_lname": "last Name",
+        "rest_keywords_user_address": "Address",
+        "rest_keywords_gender":"gender",
+        "rest_password_reset_success": "Password reset successfully",
+        "rest_password_reset_failed": "Password reset failed",
+    
 }
 
 module.exports = message;

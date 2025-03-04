@@ -12,13 +12,8 @@ const { t } = require("localizify");
 
 class User {
     signup(req, res) {
-        // console.log("signup");
         var request_data = req.body;
-        // const userLang = req.headers["accept-language"] || "en";
-        // localizify.setLocale(userLang);
-
         const rules = validationRules.signup;
-        // let message = req.language.required;
         let message = {
             required: req.language.required,
             email: t('email'),
@@ -84,6 +79,12 @@ class User {
             common.response(res, _responseData);
         });
     }
+    resendOTP(req, res) {
+        var request_data = req.body;
+        userModel.resendOTP(request_data, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
     // checkVerification status
     checkUserVerification(req, res) {
         var request_data = req.body;
@@ -91,6 +92,7 @@ class User {
             common.response(res, _responseData);
         });
     }
+
     // update user profile
     compeleteUserProfile(req, res) {
         try{        
@@ -102,8 +104,12 @@ class User {
         }
 
         let keywords={
-            'user_full_name': t('rest_keywords_user_full_name'),
-            'date_of_birth': t('rest_keywords_user_date_of_birth')
+            'user_id': t('rest_keywords_user_id'),
+            'fname': t('rest_keywords_user_fname'),
+            'lname': t('rest_keywords_user_lname'),
+            'address': t('rest_keywords_user_address'),
+            'gender': t('rest_keywords_gender'),
+            'dob': t('rest_keywords_user_date_of_birth'),
         }
         const valid = middleware.checkValidationRules(req,res,request_data,rules,message, keywords)
         if(valid){
@@ -128,6 +134,40 @@ class User {
         // }
 
         // userModel.updateUserProfile(request_data, (_responseData) => {
+        //     common.response(res, _responseData);
+        // });
+    }
+    //profile pic add
+        addProfilePic(req, res) {
+        try{        
+            const request_data = req.body;
+            const rules = validationRules.addProfilePic; 
+
+        let message={
+            required: req.language.required
+        }
+
+        let keywords={
+            'user_id': t('rest_keywords_user_id'),
+            'profile_pic': t('rest_keywords_profile_pic')
+        }
+        
+        const valid = middleware.checkValidationRules(req,res,request_data,rules,message, keywords)
+        if(valid){
+            userModel.addProfilePic(request_data, (_responseData) => {
+                common.response(res, _responseData);
+            });
+        }
+
+        }catch(error){
+            console.error("Error in complete_profile:", error);
+            return common.response(res, {
+                code: response_code.OPERATION_FAILED,
+                message: t('rest_keywords_something_went_wrong')
+            });
+        }
+        // var request_data = req.body;
+        // userModel.addProfilePic(request_data, (_responseData) => {
         //     common.response(res, _responseData);
         // });
     }
@@ -200,11 +240,41 @@ class User {
         // });
     }
     changePassword(req, res) {
-        var request_data = req.body;
+        try{
+            var request_data = req.body;
 
-        userModel.changePassword(request_data, (_responseData) => {
-            common.response(res, _responseData);
-        });
+            const rules = validationRules.changePassword
+
+            let message={
+                required:req.language.required,
+                required: t('required'),
+                'old_password.min': t('passwords_min'),
+                'new_password.min': t('passwords_min')
+            }
+
+            let keywords={
+                'new_password': t('rest_keywords_password'),
+                'old_password': t('rest_keywords_password')
+            }
+
+            const valid = middleware.checkValidationRules(req, res, request_data, rules, message, keywords);
+    
+        if (valid) {
+            userModel.changePassword(request_data, (_responseData) => {
+                common.response(res, _responseData);
+            });
+        }
+        }catch(error){
+            return common.response(res, {
+                code: response_code.OPERATION_FAILED,
+                message: t('rest_keywords_something_went_wrong')
+            });
+        }
+        // var request_data = req.body;
+
+        // userModel.changePassword(request_data, (_responseData) => {
+        //     common.response(res, _responseData);
+        // });
     }
 
 };
