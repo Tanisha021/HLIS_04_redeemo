@@ -26,7 +26,10 @@ var message = {
     "rest_keywords_post_type": "نوع المنشور",
     "rest_keywords_category_id": "معرف الفئة",
     "rest_keywords_user_id": "معرف المستخدم",
-    "rest_keywords_media_names": "أسماء الوسائط"
+    "rest_keywords_media_names": "أسماء الوسائط",
+    "rest_keywords_sp_id": "مطلوب معرف مزود الخدمة",
+    "rest_keywords_rating": "التقييم مطلوب",
+    "rest_keywords_review": "المراجعة مطلوبة"
 }
 
 module.exports = message;

@@ -37,6 +37,10 @@ var message = {
         "rest_keywords_gender":"gender",
         "rest_password_reset_success": "Password reset successfully",
         "rest_password_reset_failed": "Password reset failed",
+        "rest_keywords_sp_id": "Service Provider ID needed",
+        "rest_keywords_rating": "Rating required",
+        "rest_keywords_review": "Review required",
+
     
 }
 

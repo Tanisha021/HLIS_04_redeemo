@@ -40,13 +40,12 @@ const checkValidatorRules = {
         dob:"required",
         gender:"required"
     },
-    create_post:{
-        descriptions: "required",
-        title: "required",
-        category_name: "required",
-        user_id: "required"
+    post_review_rating:{
+        sp_id: "required",
+        rating: "required",
+        review: "required"
     },
-    
+
 
 };
 

@@ -26,7 +26,10 @@ var message = {
     "rest_keywords_post_type": "पोस्ट प्रकार",
     "rest_keywords_category_id": "श्रेणी आईडी",
     "rest_keywords_user_id": "यूजर आईडी",
-    "rest_keywords_media_names": "मीडिया नाम"
+    "rest_keywords_media_names": "मीडिया नाम",
+    "rest_keywords_sp_id": "सेवा प्रदाता आईडी आवश्यक",
+    "rest_keywords_rating": "रेटिंग आवश्यक",
+    "rest_keywords_review": "समीक्षा आवश्यक"
 };
 
 module.exports = message;

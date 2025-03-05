@@ -2,7 +2,8 @@
 const response_code = require("../../../../utilities/response-error-code");
 const constant = require("../../../../config/constant");
 const common = require("../../../../utilities/common");
-const userModel = require("../models/user-model");
+const authModel = require("../models/auth-model");
+const userModel =require("../models/user-model");
 const Validator = require('Validator')
 const {default: localizify} = require('localizify');
 const validationRules  = require('../../../validation_rules');
@@ -30,7 +31,7 @@ class User {
         const valid = middleware.checkValidationRules(req, res, request_data, rules, message, keywords);
     
         if (valid) {
-            userModel.signup(request_data, (_responseData) => {
+            authModel.signup(request_data, (_responseData) => {
                 common.response(res, _responseData);
             });
         }
@@ -55,7 +56,7 @@ class User {
         }
         const valid = middleware.checkValidationRules(req,res,request_data,rules,message, keywords)
         if(valid){
-            userModel.login(request_data, (_responseData) => {
+            authModel.login(request_data, (_responseData) => {
                 common.response(res, _responseData);
             });
         }
@@ -68,27 +69,27 @@ class User {
     // generate OTP Function
     verifyOTP(req, res) {
         var request_data = req.body;
-        userModel.verifyOTP(request_data, (_responseData) => {
+        authModel.verifyOTP(request_data, (_responseData) => {
             common.response(res, _responseData);
         });
     }
 
     validateOTP(req, res) {
         var request_data = req.body;
-        userModel.validateOTP(request_data, (_responseData) => {
+        authModel.validateOTP(request_data, (_responseData) => {
             common.response(res, _responseData);
         });
     }
     resendOTP(req, res) {
         var request_data = req.body;
-        userModel.resendOTP(request_data, (_responseData) => {
+        authModel.resendOTP(request_data, (_responseData) => {
             common.response(res, _responseData);
         });
     }
     // checkVerification status
     checkUserVerification(req, res) {
         var request_data = req.body;
-        userModel.checkUserVerification(request_data, (_responseData) => {
+        authModel.checkUserVerification(request_data, (_responseData) => {
             common.response(res, _responseData);
         });
     }
@@ -113,7 +114,7 @@ class User {
         }
         const valid = middleware.checkValidationRules(req,res,request_data,rules,message, keywords)
         if(valid){
-            userModel.compeleteUserProfile(request_data, (_responseData) => {
+            authModel.compeleteUserProfile(request_data, (_responseData) => {
                 common.response(res, _responseData);
             });
         }
@@ -137,40 +138,6 @@ class User {
         //     common.response(res, _responseData);
         // });
     }
-    //profile pic add
-        addProfilePic(req, res) {
-        try{        
-            const request_data = req.body;
-            const rules = validationRules.addProfilePic; 
-
-        let message={
-            required: req.language.required
-        }
-
-        let keywords={
-            'user_id': t('rest_keywords_user_id'),
-            'profile_pic': t('rest_keywords_profile_pic')
-        }
-        
-        const valid = middleware.checkValidationRules(req,res,request_data,rules,message, keywords)
-        if(valid){
-            userModel.addProfilePic(request_data, (_responseData) => {
-                common.response(res, _responseData);
-            });
-        }
-
-        }catch(error){
-            console.error("Error in complete_profile:", error);
-            return common.response(res, {
-                code: response_code.OPERATION_FAILED,
-                message: t('rest_keywords_something_went_wrong')
-            });
-        }
-        // var request_data = req.body;
-        // userModel.addProfilePic(request_data, (_responseData) => {
-        //     common.response(res, _responseData);
-        // });
-    }
 
     forgotPassword(req, res) {
         try{
@@ -190,7 +157,7 @@ class User {
             const valid = middleware.checkValidationRules(req, res, request_data, rules, message, keywords);
         
             if (valid) {
-                userModel.forgotPassword(request_data, (_responseData) => {
+                authModel.forgotPassword(request_data, (_responseData) => {
                     common.response(res, _responseData);
                 });
             }
@@ -223,7 +190,7 @@ class User {
             const valid = middleware.checkValidationRules(req, res, request_data, rules, message, keywords);
         
             if (valid) {
-                userModel.resetPassword(request_data, (_responseData) => {
+                authModel.resetPassword(request_data, (_responseData) => {
                     common.response(res, _responseData);
                 });
             }
@@ -260,7 +227,7 @@ class User {
             const valid = middleware.checkValidationRules(req, res, request_data, rules, message, keywords);
     
         if (valid) {
-            userModel.changePassword(request_data, (_responseData) => {
+            authModel.changePassword(request_data, (_responseData) => {
                 common.response(res, _responseData);
             });
         }
@@ -276,6 +243,105 @@ class User {
         //     common.response(res, _responseData);
         // });
     }
+
+    categoryListing(req, res) {
+        var request_data = req.body;
+        userModel.categoryListing(request_data, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    displaySeriveProviders(req, res) {
+        var request_data = req.body;
+        userModel.displaySeriveProviders(request_data, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    serviceProviderDetails(req, res) {
+        var request_data = req.body;
+        userModel.serviceProviderDetails(request_data, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    serviceListings(req, res) {
+        var request_data = req.body;
+        userModel.serviceListings(request_data,req.user_id,req.user, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    serviceProviderDetails(req, res) {
+        var request = req.params;
+        var request_data = req.body;
+        userModel.serviceProviderDetails(request_data,req.user_id,req.user,request.sp_id, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    redeemVoucher(req, res) {
+        var request_data = req.body;
+        userModel. redeemVoucher(request_data,req.user_id, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    listUserFav(req, res) {
+        var request_data = req.body;
+        userModel. listUserFav(request_data,req.user_id, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    notifications(req, res) {
+        var request_data = req.body;
+        userModel. notifications(request_data,req.user_id, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    logout(req, res) {
+        var request_data = req.body;
+        userModel.logout(request_data,req.user_id, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    delete(req, res) {
+        var request_data = req.body;
+        userModel.delete(request_data,req.user_id, (_responseData) => {
+            common.response(res, _responseData);
+        });
+    }
+    post_review_rating(req, res) {
+        try{
+            var request_data = req.body;
+             const rules = validationRules.post_review_rating;
+            // let message = req.language.required;
+            let message = {
+                required: req.language.required,
+                'sp_id':t('sp_id'),
+                'review': t('review'),
+
+            };
+        
+            let keywords = {
+                'sp_id': t('rest_keywords_sp_id'),
+                'rating': t('rest_keywords_rating'),
+                'review': t('rest_keywords_review'),
+            };
+    
+            const valid = middleware.checkValidationRules(req, res, request_data, rules, message, keywords);
+        
+            if (valid) {
+                userModel.post_review_rating(request_data,req.user_id, (_responseData) => {
+                    common.response(res, _responseData);
+                });
+            }
+        }catch(error){
+            return common.response(res, {
+                code: response_code.OPERATION_FAILED,
+                message: t('rest_keywords_something_went_wrong')
+            });
+        }
+        // var request_data = req.body;
+        // userModel.post_review_rating(request_data,req.user_id, (_responseData) => {
+        //     common.response(res, _responseData);
+        // });
+    }
+
 
 };
 module.exports = new User();

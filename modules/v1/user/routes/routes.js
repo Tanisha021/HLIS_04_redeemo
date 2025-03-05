@@ -13,6 +13,18 @@ const customerRoute = (app) => {
     app.post("/v1/user/reset-password", User.resetPassword);
     app.post("/v1/user/change-password", User.changePassword);
 
+    //figma apis
+    app.post("/v1/user/category-listing", User.categoryListing); 
+    app.post("/v1/user/trending-service-providers", User.displaySeriveProviders); 
+    app.post("/v1/user/service-listings", User.serviceListings); 
+    app.post("/v1/user/service-provider-details/:sp_id", User.serviceProviderDetails); 
+    app.post("/v1/user/redeem-voucher", User.redeemVoucher);
+    app.post("/v1/user/list-user-fav", User.listUserFav);
+    app.post("/v1/user/notification", User.notifications);
+    app.post("/v1/user/post-review-rating", User.post_review_rating);
+    app.post("/v1/user/logout", User.logout);
+    app.post("/v1/user/delete", User.delete);
+
 };
 
 module.exports = customerRoute;
