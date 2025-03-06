@@ -18,7 +18,7 @@ var message = {
         "rest_keywords_user_full_name": "user full name",
         "rest_keywords_user_date_of_birth": "date of birth",
         "rest_keywords_something_went_wrong": "Oopss... Something Went Wrong !",
-        "mobile_number_min": "Mobile number must be at least 10 digits",
+        "rest_keywords_phone_number": "Mobile number must be of  10 digits",
         "mobile_number_numeric": "Mobile number must contain only numbers",
         "passwords_min": "Password must be at least 8 characters long",
         "rest_keywords_descriptions": "Description",

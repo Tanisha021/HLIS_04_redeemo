@@ -21,6 +21,7 @@ class UserModel {
                     const userData = {
                         email_id: request_data.email_id || null,
                         phone_number: request_data.phone_number,
+                        signup_type: request_data.signup_type || 'S', // 'S' for standard
                         passwords: request_data.passwords ? md5(request_data.passwords) : null,
                         social_id: request_data.social_id || null,
                         signup_type: request_data.social_type || null, // 'google' or 'facebook'

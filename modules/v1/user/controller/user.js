@@ -18,14 +18,15 @@ class User {
         let message = {
             required: req.language.required,
             email: t('email'),
-            'mobile_number.min': t('mobile_number_min'),
-            'mobile_number.regex': t('mobile_number_numeric'),
+            'phone_number.regex': t('mobile_number_numeric'),
             'passwords.min': t('passwords_min')
         };
     
         let keywords = {
             'password': t('rest_keywords_password'),
-            'email_id': t('email')
+            'email_id': t('email'),
+            'phone_number.size': t('rest_keywords_phone_number'),
+            'phone_number.regex': t('mobile_number_numeric')
         };
 
         const valid = middleware.checkValidationRules(req, res, request_data, rules, message, keywords);
@@ -314,7 +315,6 @@ class User {
                 required: req.language.required,
                 'sp_id':t('sp_id'),
                 'review': t('review'),
-
             };
         
             let keywords = {
